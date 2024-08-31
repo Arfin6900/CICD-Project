@@ -24,7 +24,7 @@ try {
     }
 
     if (baseUrl && baseUrl.includes('localhost')) {
-        console.log('baseUrl includes localhost.');
+        console.log('baseUrl includes localhost.',baseUrl);
         process.exit(1); // exit with failure
     } else if (baseUrl) {
         console.log('baseUrl does not include localhost.');
