@@ -24,12 +24,13 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Build the app
+    - name: Building app
       run: npm run build
 
     - name: Check if baseUrl includes localhost
       id: check_base_url
       run: node check-base-url.js
+      continue-on-error: true
 
     - name: Proceed if baseUrl is valid
       if: ${{ steps.check_base_url.outcome == 'success' }}
@@ -37,30 +38,4 @@ jobs:
 
     - name: Fail if baseUrl includes localhost
       if: ${{ steps.check_base_url.outcome != 'success' }}
-      run: |
-        echo "baseUrl includes localhost. Failing the job."
-        exit 1
-
-    - name: Notify user to check Actions section
-      uses: actions/github-script@v6
-      with:
-        script: |
-          const { context } = require('@actions/github');
-
-          if (context.payload.pull_request) {
-            const pr_number = context.payload.pull_request.number;
-            github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: pr_number,
-              body: "Please check the Actions section after pushing the changes."
-            });
-          } else {
-            const commit_sha = context.sha;
-            github.rest.repos.createCommitComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              commit_sha: commit_sha,
-              body: "Please check the Actions section after pushing the changes."
-            });
-          }
+      run: echo "baseUrl includes localhost. Failing the job." && exit 1
