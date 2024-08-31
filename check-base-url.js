@@ -1,5 +1,7 @@
-const fs = require('fs');
-const path = './src/config/config.js';
+import fs from 'fs';
+import path from 'path';
+
+const configPath = path.resolve('./src/config/config.js');
 
 // Function to check if a line is commented
 const isCommented = (line) => {
@@ -7,7 +9,7 @@ const isCommented = (line) => {
 };
 
 try {
-    const fileContent = fs.readFileSync(path, 'utf8');
+    const fileContent = fs.readFileSync(configPath, 'utf8');
     const lines = fileContent.split('\n');
     let baseUrl = null;
 
@@ -24,7 +26,7 @@ try {
     }
 
     if (baseUrl && baseUrl.includes('localhost')) {
-        console.log('baseUrl includes localhost.',baseUrl);
+        console.log('baseUrl includes localhost.');
         process.exit(1); // exit with failure
     } else if (baseUrl) {
         console.log('baseUrl does not include localhost.');
