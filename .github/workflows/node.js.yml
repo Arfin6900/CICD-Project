@@ -11,6 +11,8 @@ on:
 jobs:
   check-base-url:
     runs-on: ubuntu-latest
+    outputs:
+      base_url_success: ${{ steps.check_base_url.outcome }}  # Set output based on step outcome
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -42,7 +44,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: check-base-url
-    if: ${{ steps.check_base_url.outcome == 'success' }}  # Only deploy if the CI checks pass
+    if: ${{ jobs.check-base-url.outputs.base_url_success == 'success' }}  # Check the output from the previous job
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
