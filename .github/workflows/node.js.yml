@@ -41,7 +41,7 @@ jobs:
         if: ${{ steps.check_base_url.outcome != 'success' }}
         run: echo "baseUrl includes localhost. Failing the job." && exit 1
 
-  deploy:
+    deploy:
     runs-on: ubuntu-latest
     needs: check-base-url
     steps:
@@ -53,11 +53,14 @@ jobs:
         with:
           host: 192.168.2.114  # Kali machine IP
           username: grayhat    # Your Kali machine username
-          key: ${{ secrets.SSH_PRIVATE_KEY }}  # Your SSH private key stored in GitHub Secrets
-          port: 22  # Default SSH port
+          key: ${{ secrets.SSH_PRIVATE_KEY }}  # Private key in GitHub secrets
+          port: 22
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}  # If your private key is encrypted
           script: |
             cd /var/www/myapp/CICD-Project &&
             git pull origin main &&
             npm install --production &&
             npm run build &&
             sudo systemctl restart nginx  # Restart Nginx server
+          debug: true  # Enable debugging logs
+
