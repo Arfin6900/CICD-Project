@@ -62,5 +62,4 @@ jobs:
             npm install --production &&
             npm run build &&
             sudo systemctl restart nginx  # Restart Nginx server
-          debug: true
 
