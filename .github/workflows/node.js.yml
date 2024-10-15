@@ -41,7 +41,7 @@ jobs:
         if: ${{ steps.check_base_url.outcome != 'success' }}
         run: echo "baseUrl includes localhost. Failing the job." && exit 1
 
-    deploy:
+  deploy:
     runs-on: ubuntu-latest
     needs: check-base-url
     steps:
@@ -62,5 +62,4 @@ jobs:
             npm install --production &&
             npm run build &&
             sudo systemctl restart nginx  # Restart Nginx server
-          debug: true  # Enable debugging logs
 
