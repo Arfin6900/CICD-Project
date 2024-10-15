@@ -44,7 +44,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: check-base-url
-    if: ${{ jobs.check-base-url.outputs.base_url_success == 'success' }}  # Check the output from the previous job
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
