@@ -1,7 +1,7 @@
 name: Deploy
 # Controls when the action will run. 
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
+  # Triggers the workflow on push or pull request events but only for the main branch
   push:
     branches: [ main ]
 
@@ -18,13 +18,19 @@ jobs:
       uses: appleboy/ssh-action@master
       with:
         host: 0.tcp.ap.ngrok.io  # Kali machine IP
-        username: grayhat    # Your Kali machine username
+        username: grayhat         # Your Kali machine username
         key: ${{ secrets.SSH_PRIVATE_KEY }}  # Private key in GitHub secrets
         port: 18912
         script: |
+          echo "Setting up safe directory..." &&
           git config --global --add safe.directory /var/www/myapp/CICD-Project &&
+          echo "Changing directory to /var/www/myapp/CICD-Project..." &&
           cd /var/www/myapp/CICD-Project &&
+          echo "Pulling the latest changes from the repository..." &&
           git pull origin main &&
+          echo "Installing npm packages..." &&
           npm install &&
+          echo "Building the application..." &&
           npm run build &&
-          sudo systemctl restart nginx  # Restart Nginx server
+          echo "Restarting Nginx server..." &&
+          systemctl restart nginx  # Restart Nginx server
