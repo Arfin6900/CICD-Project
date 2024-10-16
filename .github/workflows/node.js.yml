@@ -23,6 +23,7 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}  # Private key in GitHub secrets
         port: 18912
         script: |
+          git config --global --add safe.directory /var/www/myapp/CICD-Project &&
           cd /var/www/myapp/CICD-Project &&
           git pull origin main &&
           npm install --production &&
