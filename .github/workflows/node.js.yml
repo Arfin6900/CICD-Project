@@ -33,4 +33,4 @@ jobs:
           echo "Building the application..." &&
           npm run build &&
           echo "Restarting Nginx server..." &&
-          systemctl restart nginx  # Restart Nginx server
+          sudo systemctl restart nginx  # Restart Nginx server
