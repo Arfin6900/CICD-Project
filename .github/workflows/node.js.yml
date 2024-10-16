@@ -52,7 +52,7 @@ jobs:
         uses: appleboy/ssh-action@v0.1.4
         with:
           host: 4.tcp.eu.ngrok.io  # Kali machine IP
-          username: grayhat    # Your Kali machine username
+          username: arfeennasir35@gmail.com    # Your Kali machine username
           key: ${{ secrets.SSH_PRIVATE_KEY }}  # Private key in GitHub secrets
           port: 13277
           passphrase: ${{ secrets.SSH_PASSPHRASE }}  # If your private key is encrypted
