@@ -22,7 +22,7 @@ function App() {
           count is {count}
         </button>
         <p>
-          Edit <code>src/App.jsx</code> CICD implemented
+          Edit <code>src/App.jsx</code> CICD implemented again
         </p>
       </div>
       <p className="read-the-docs">
