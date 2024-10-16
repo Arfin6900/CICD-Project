@@ -51,10 +51,10 @@ jobs:
       - name: Deploy to Kali Linux
         uses: appleboy/ssh-action@v0.1.4
         with:
-          host: 192.168.2.114  # Kali machine IP
+          host: 4.tcp.eu.ngrok.io  # Kali machine IP
           username: grayhat    # Your Kali machine username
           key: ${{ secrets.SSH_PRIVATE_KEY }}  # Private key in GitHub secrets
-          port: 22
+          port: 13277
           passphrase: ${{ secrets.SSH_PASSPHRASE }}  # If your private key is encrypted
           script: |
             cd /var/www/myapp/CICD-Project &&
