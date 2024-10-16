@@ -18,7 +18,7 @@ jobs:
       uses: appleboy/ssh-action@master
       with:
         host: 0.tcp.ap.ngrok.io  # Kali machine IP
-        username: root         # Your Kali machine username
+        username: grayhat         # Your Kali machine username
         key: ${{ secrets.SSH_PRIVATE_KEY }}  # Private key in GitHub secrets
         port: 18912
         script: |
