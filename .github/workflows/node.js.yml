@@ -17,11 +17,11 @@ jobs:
     - name: Deploy using ssh
       uses: appleboy/ssh-action@master
       with:
-        host: 4.tcp.eu.ngrok.io  # Kali machine IP
+        host: 0.tcp.ap.ngrok.io  # Kali machine IP
         username: grayhat    # Your Kali machine username
         password: 11223344
         key: ${{ secrets.SSH_PRIVATE_KEY }}  # Private key in GitHub secrets
-        port: 13277
+        port: 18912
         script: |
           cd /var/www/myapp/CICD-Project &&
           git pull origin main &&
