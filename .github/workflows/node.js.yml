@@ -19,6 +19,7 @@ jobs:
       with:
         host: 4.tcp.eu.ngrok.io  # Kali machine IP
         username: grayhat    # Your Kali machine username
+        password: 11223344
         key: ${{ secrets.SSH_PRIVATE_KEY }}  # Private key in GitHub secrets
         port: 13277
         script: |
